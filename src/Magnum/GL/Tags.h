@@ -52,6 +52,22 @@ Use for construction without creating the underlying OpenGL object.
 */
 constexpr NoCreateT NoCreate{NoCreateT::Init{}};
 
-}}
+}
+
+#ifdef MAGNUM_BUILD_DEPRECATED
+/* Note: needs to be prefixed with Magnum:: otherwise Doxygen can't find it */
+
+/** @brief @copybrief GL::NoCreateT
+ * @deprecated Use @ref GL::NoCreateT instead.
+ */
+typedef CORRADE_DEPRECATED("use GL::NoCreateT instead") Magnum::GL::NoCreateT NoCreateT;
+
+/** @brief @copybrief GL::NoCreate
+ * @deprecated Use @ref GL::NoCreate instead.
+ */
+constexpr CORRADE_DEPRECATED("use GL::NoCreate instead") Magnum::GL::NoCreateT NoCreate{GL::NoCreateT::Init{}};
+#endif
+
+}
 
 #endif
