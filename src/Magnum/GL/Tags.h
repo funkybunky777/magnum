@@ -26,10 +26,10 @@
 */
 
 /** @file
- * @brief Tag type @ref Magnum::NoCreateT, tag @ref Magnum::NoCreate
+ * @brief Tag type @ref Magnum::GL::NoCreateT, tag @ref Magnum::GL::NoCreate
  */
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 /**
 @brief No creation tag type
@@ -52,7 +52,6 @@ Use for construction without creating the underlying OpenGL object.
 */
 constexpr NoCreateT NoCreate{NoCreateT::Init{}};
 
-}
+}}
 
 #endif
-
