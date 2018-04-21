@@ -23,11 +23,12 @@
     DEALINGS IN THE SOFTWARE.
 */
 
-#include "Magnum/Tags.h"
-#include "Magnum/Magnum.h"
-#include "Corrade/TestSuite/Tester.h"
+#include <Corrade/TestSuite/Tester.h>
 
-namespace Magnum { namespace Test {
+#include "Magnum/Magnum.h"
+#include "Magnum/GL/Tags.h"
+
+namespace Magnum { namespace GL { namespace Test {
 
 struct TagsTest: TestSuite::Tester {
     explicit TagsTest();
@@ -43,6 +44,6 @@ void TagsTest::noDefaultConstructor() {
     CORRADE_VERIFY(!std::is_default_constructible<NoCreateT>::value);
 }
 
-}}
+}}}
 
-CORRADE_TEST_MAIN(Magnum::Test::TagsTest)
+CORRADE_TEST_MAIN(Magnum::GL::Test::TagsTest)
