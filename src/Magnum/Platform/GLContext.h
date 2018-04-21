@@ -129,6 +129,13 @@ class GLContext: public GL::Context {
         bool tryCreate() { return Magnum::GL::Context::tryCreate(); }
 };
 
+#ifdef MAGNUM_BUILD_DEPRECATED
+/** @brief @copybrief GL::Extension
+ * @deprecated Use @ref GL::Extension instead.
+ */
+typedef CORRADE_DEPRECATED("use Platform::GLContext instead") GLContext Context;
+#endif
+
 }}
 
 #endif
