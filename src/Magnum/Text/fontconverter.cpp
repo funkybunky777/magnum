@@ -86,7 +86,8 @@ Arguments:
 -   `--output-size "X Y"` --- output atlas size. If set to zero size, distance
     field computation will not be used. (default: `"256 256"`)
 -   `--radius N` --- distance field computation radius (default: `24`)
--   `--magnum-...` --- engine-specific options (see @ref Context for details)
+-   `--magnum-...` --- engine-specific options (see
+    @ref GL-Context-command-line for details)
 
 The resulting font files can be then used as specified in the documentation of
 `converter` plugin.
@@ -119,7 +120,7 @@ class FontConverter: public Platform::WindowlessApplication {
         Utility::Arguments args;
 };
 
-FontConverter::FontConverter(const Arguments& arguments): Platform::WindowlessApplication{arguments, NoCreate} {
+FontConverter::FontConverter(const Arguments& arguments): Platform::WindowlessApplication{arguments, GL::NoCreate} {
     args.addArgument("input").setHelp("input", "input font")
         .addArgument("output").setHelp("output", "output filename prefix")
         .addNamedArgument("font").setHelp("font", "font plugin")
