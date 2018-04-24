@@ -40,8 +40,8 @@
 #include <Corrade/Containers/EnumSet.h>
 
 #include "Magnum/Magnum.h"
-#include "Magnum/OpenGL.h"
 #include "Magnum/Tags.h"
+#include "Magnum/GL/OpenGL.h"
 #include "Magnum/Platform/Platform.h"
 
 namespace Magnum { namespace Platform {
@@ -65,20 +65,21 @@ class WindowlessWindowsEglContext {
          * @brief Constructor
          * @param configuration Context configuration
          * @param context       Optional Magnum context instance constructed
-         *      using @ref NoCreate to manage driver workarounds
+         *      using @ref GL::NoCreate to manage driver workarounds
          *
-         * Once the context is created, make it current using @ref makeCurrent()
-         * and create @ref Platform::Context instance to be able to use Magnum.
+         * Once the context is created, make it current using
+         * @ref makeCurrent() and create @ref Platform::GLContext instance to
+         * be able to use Magnum.
          * @see @ref isCreated()
          */
-        explicit WindowlessWindowsEglContext(const Configuration& configuration, Context* context = nullptr);
+        explicit WindowlessWindowsEglContext(const Configuration& configuration, GLContext* context = nullptr);
 
         /**
          * @brief Construct without creating the context
          *
          * Move a instance with created context over to make it usable.
          */
-        explicit WindowlessWindowsEglContext(NoCreateT) {}
+        explicit WindowlessWindowsEglContext(GL::NoCreateT) {}
 
         /** @brief Copying is not allowed */
         WindowlessWindowsEglContext(const WindowlessWindowsEglContext&) = delete;
@@ -156,7 +157,7 @@ class WindowlessWindowsEglContext::Configuration {
          * @brief Set context flags
          * @return Reference to self (for method chaining)
          *
-         * Default is no flag. See also @ref Context::flags().
+         * Default is no flag. See also @ref GL::Context::flags().
          */
         Configuration& setFlags(Flags flags) {
             _flags = flags;
@@ -276,14 +277,14 @@ class WindowlessWindowsEglApplication {
          * Unlike above, the context is not created and must be created later
          * with @ref createContext() or @ref tryCreateContext().
          */
-        explicit WindowlessWindowsEglApplication(const Arguments& arguments, NoCreateT);
+        explicit WindowlessWindowsEglApplication(const Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief WindowlessWindowsEglApplication(const Arguments&, NoCreateT)
-         * @deprecated Use @ref WindowlessWindowsEglApplication(const Arguments&, NoCreateT) instead.
+         * @brief @copybrief WindowlessWindowsEglApplication(const Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref WindowlessWindowsEglApplication(const Arguments&, GL::NoCreateT) instead.
          */
-        CORRADE_DEPRECATED("use WindowlessWindowsEglApplication(const Arguments&, NoCreateT) instead") explicit WindowlessWindowsEglApplication(const Arguments& arguments, std::nullptr_t): WindowlessWindowsEglApplication{arguments, NoCreate} {}
+        CORRADE_DEPRECATED("use WindowlessWindowsEglApplication(const Arguments&, GL::NoCreateT) instead") explicit WindowlessWindowsEglApplication(const Arguments& arguments, std::nullptr_t): WindowlessWindowsEglApplication{arguments, GL::NoCreate} {}
         #endif
 
         /** @brief Copying is not allowed */
@@ -338,7 +339,7 @@ class WindowlessWindowsEglApplication {
 
     private:
         WindowlessWindowsEglContext _glContext;
-        std::unique_ptr<Platform::Context> _context;
+        std::unique_ptr<Platform::GLContext> _context;
 };
 
 /** @hideinitializer

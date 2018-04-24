@@ -31,8 +31,8 @@
 
 #include <Corrade/Utility/Debug.h>
 
-#include "Magnum/Context.h"
-#include "Magnum/OpenGL.h"
+#include "Magnum/GL/Context.h"
+#include "Magnum/GL/OpenGL.h"
 
 namespace Magnum { namespace Platform {
 
@@ -52,9 +52,10 @@ class GLContext: public GL::Context {
          * platform-specific API, does initial setup, detects available
          * features and enables them throughout the engine. If detected version
          * is unsupported or any other error occurs, a message is printed to
-         * output and the application exits. See @ref Context(NoCreateT, Int, char**)
-         * and @ref tryCreate() for an alternative.
-         * @see @ref Context-command-line, @fn_gl{Get} with @def_gl{MAJOR_VERSION},
+         * output and the application exits. See
+         * @ref GLContext(GL::NoCreateT, Int, char**) and @ref tryCreate() for
+         * an alternative.
+         * @see @ref GL-Context-command-line, @fn_gl{Get} with @def_gl{MAJOR_VERSION},
          *      @def_gl{MINOR_VERSION}, @def_gl{CONTEXT_FLAGS},
          *      @def_gl{NUM_EXTENSIONS}, @fn_gl{GetString} with @def_gl{EXTENSIONS}
          */
@@ -72,7 +73,7 @@ class GLContext: public GL::Context {
          * Equivalent to passing @cpp {0, nullptr} @ce to
          * @ref GLContext(Int, const char**). Even if the command-line options
          * are not propagated, it's still possible to affect the renderer
-         * behavior from the environment. See @ref Context-command-line for
+         * behavior from the environment. See @ref GL-Context-command-line for
          * more information.
          */
         explicit GLContext(): GLContext{0, nullptr} {}
@@ -80,16 +81,16 @@ class GLContext: public GL::Context {
         /**
          * @brief Construct the class without doing complete setup
          *
-         * Unlike @ref Context(Int, char**) just parses command-line arguments
-         * and sets @ref version() to @ref Version::None, everything else is
-         * left in empty state. Use @ref create() or @ref tryCreate() to
-         * complete the setup.
+         * Unlike @ref GLContext(Int, char**) just parses command-line
+         * arguments and sets @ref version() to @ref GL::Version::None,
+         * everything else is left in an empty state. Use @ref create() or
+         * @ref tryCreate() to complete the setup.
          */
         explicit GLContext(GL::NoCreateT, Int argc, const char** argv):
             #ifndef CORRADE_TARGET_EMSCRIPTEN
-            Magnum::Context{GL::NoCreate, argc, argv, flextGLInit} {}
+            GL::Context{GL::NoCreate, argc, argv, flextGLInit} {}
             #else
-            Magnum::Context{GL::NoCreate, argc, argv, nullptr} {}
+            GL::Context{GL::NoCreate, argc, argv, nullptr} {}
             #endif
 
         /** @overload */
@@ -102,10 +103,10 @@ class GLContext: public GL::Context {
          * @brief Construct the class without doing complete setup
          *
          * Equivalent to passing @cpp {NoCreate, 0, nullptr} @ce to
-         * @ref Context(NoCreateT, Int, const char**). Even if the command-line
-         * options are not propagated, it's still possible to affect the
-         * renderer behavior from the environment. See @ref Context-command-line
-         * for more information.
+         * @ref GLContext(GL::NoCreateT, Int, const char**). Even if the
+         * command-line options are not propagated, it's still possible to
+         * affect the renderer behavior from the environment. See
+         * @ref GL-Context-command-line for more information.
          */
         explicit GLContext(GL::NoCreateT): GLContext{GL::NoCreate, 0, nullptr} {}
 
@@ -113,10 +114,10 @@ class GLContext: public GL::Context {
          * @brief Complete the context setup and exit on failure
          *
          * Finalizes the setup after the class was created using
-         * @ref Context(NoCreateT, Int, char**). If detected version is
+         * @ref GLContext(GL::NoCreateT, Int, char**). If detected version is
          * unsupported or any other error occurs, a message is printed to error
-         * output and the application exits. See @ref Context(Int, char**) for
-         * more information and @ref tryCreate() for an alternative.
+         * output and the application exits. See @ref GLContext(Int, char**)
+         * for more information and @ref tryCreate() for an alternative.
          */
         void create() { return Magnum::GL::Context::create(); }
 

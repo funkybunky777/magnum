@@ -167,13 +167,13 @@ class AndroidApplication {
         explicit AndroidApplication(const Arguments& arguments);
         #endif
 
-        /** @copydoc Sdl2Application::Sdl2Application(const Arguments&, NoCreateT) */
-        explicit AndroidApplication(const Arguments& arguments, NoCreateT);
+        /** @copydoc Sdl2Application::Sdl2Application(const Arguments&, GL::NoCreateT) */
+        explicit AndroidApplication(const Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief AndroidApplication(const Arguments&, NoCreateT)
-         * @deprecated Use @ref AndroidApplication(const Arguments&, NoCreateT) instead.
+         * @brief @copybrief AndroidApplication(const Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref AndroidApplication(const Arguments&, GL::NoCreateT) instead.
          */
         CORRADE_DEPRECATED("use AndroidApplication(const Arguments&, NoCreateT) instead") explicit AndroidApplication(const Arguments& arguments, std::nullptr_t): AndroidApplication{arguments, NoCreate} {}
         #endif
@@ -338,8 +338,8 @@ class AndroidApplication::Configuration {
          * @brief Set context version
          *
          * @note This function does nothing and is included only for
-         *      compatibility with other toolkits. @ref Version::GLES200 or
-         *      @ref Version::GLES300 is used based on engine compile-time
+         *      compatibility with other toolkits. @ref GL::Version::GLES200 or
+         *      @ref GL::Version::GLES300 is used based on engine compile-time
          *      settings.
          */
         Configuration& setVersion(Version) { return *this; }

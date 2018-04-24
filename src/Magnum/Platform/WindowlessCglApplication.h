@@ -33,14 +33,14 @@
 
 #include <memory>
 
-#include "Magnum/OpenGL.h"
-#include "Magnum/Tags.h"
+#include "Magnum/Magnum.h"
+#include "Magnum/GL/OpenGL.h"
+#include "Magnum/GL/Tags.h"
+#include "Magnum/Platform/Platform.h"
+
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/CGLTypes.h>
 #include <OpenGL/CGLCurrent.h>
-
-#include "Magnum/Magnum.h"
-#include "Magnum/Platform/Platform.h"
 
 namespace Magnum { namespace Platform {
 
@@ -64,7 +64,7 @@ class WindowlessCglContext {
          * @brief Constructor
          * @param configuration Context configuration
          * @param context       Optional Magnum context instance constructed
-         *      using @ref NoCreate to manage driver workarounds
+         *      using @ref GL::NoCreate to manage driver workarounds
          *
          * If version is not specified in @p configuration, it first tries to
          * create core context (OpenGL 3.2+), if that fails, tries OpenGL 3.0+
@@ -72,17 +72,18 @@ class WindowlessCglContext {
          * context.
          *
          * Once the context is created, make it current using @ref makeCurrent()
-         * and create @ref Platform::Context instance to be able to use Magnum.
+         * and create @ref Platform::GLContext instance to be able to use
+         * Magnum.
          * @see @ref isCreated()
          */
-        explicit WindowlessCglContext(const Configuration& configuration, Context* context = nullptr);
+        explicit WindowlessCglContext(const Configuration& configuration, GLContext* context = nullptr);
 
         /**
          * @brief Construct without creating the context
          *
          * Move a instance with created context over to make it usable.
          */
-        explicit WindowlessCglContext(NoCreateT) {}
+        explicit WindowlessCglContext(GL::NoCreateT) {}
 
         /** @brief Copying is not allowed */
         WindowlessCglContext(const WindowlessCglContext&) = delete;
@@ -239,14 +240,14 @@ class WindowlessCglApplication {
          * Unlike above, the context is not created and must be created later
          * with @ref createContext() or @ref tryCreateContext().
          */
-        explicit WindowlessCglApplication(const Arguments& arguments, NoCreateT);
+        explicit WindowlessCglApplication(const Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief WindowlessCglApplication(const Arguments&, NoCreateT)
-         * @deprecated Use @ref WindowlessCglApplication(const Arguments&, NoCreateT) instead.
+         * @brief @copybrief WindowlessCglApplication(const Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref WindowlessCglApplication(const Arguments&, GL::NoCreateT) instead.
          */
-        CORRADE_DEPRECATED("use WindowlessCglApplication(const Arguments&, NoCreateT) instead") explicit WindowlessCglApplication(const Arguments& arguments, std::nullptr_t): WindowlessCglApplication{arguments, NoCreate} {}
+        CORRADE_DEPRECATED("use WindowlessCglApplication(const Arguments&, GL::NoCreateT) instead") explicit WindowlessCglApplication(const Arguments& arguments, std::nullptr_t): WindowlessCglApplication{arguments, NoCreate} {}
         #endif
 
         /** @brief Copying is not allowed */
@@ -302,7 +303,7 @@ class WindowlessCglApplication {
 
     private:
         WindowlessCglContext _glContext;
-        std::unique_ptr<Platform::Context> _context;
+        std::unique_ptr<Platform::GLContext> _context;
 };
 
 /** @hideinitializer

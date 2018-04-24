@@ -40,8 +40,8 @@
 #undef Status
 
 #include "Magnum/Magnum.h"
-#include "Magnum/OpenGL.h"
-#include "Magnum/Tags.h"
+#include "Magnum/GL/OpenGL.h"
+#include "Magnum/GL/Tags.h"
 #include "Magnum/Platform/Platform.h"
 
 namespace Magnum { namespace Platform {
@@ -66,20 +66,21 @@ class WindowlessEglContext {
          * @brief Constructor
          * @param configuration Context configuration
          * @param context       Optional Magnum context instance constructed
-         *      using @ref NoCreate to manage driver workarounds
+         *      using @ref GL::NoCreate to manage driver workarounds
          *
          * Once the context is created, make it current using @ref makeCurrent()
-         * and create @ref Platform::Context instance to be able to use Magnum.
+         * and create @ref Platform::GLContext instance to be able to use
+         * Magnum.
          * @see @ref isCreated()
          */
-        explicit WindowlessEglContext(const Configuration& configuration, Context* context = nullptr);
+        explicit WindowlessEglContext(const Configuration& configuration, GLContext* context = nullptr);
 
         /**
          * @brief Construct without creating the context
          *
          * Move a instance with created context over to make it usable.
          */
-        explicit WindowlessEglContext(NoCreateT) {}
+        explicit WindowlessEglContext(GL::NoCreateT) {}
 
         /** @brief Copying is not allowed */
         WindowlessEglContext(const WindowlessEglContext&) = delete;
@@ -164,7 +165,7 @@ class WindowlessEglContext::Configuration {
          * @brief Set context flags
          * @return Reference to self (for method chaining)
          *
-         * Default is no flag. See also @ref Context::flags().
+         * Default is no flag. See also @ref GL::Context::flags().
          * @requires_gles Context flags are not available in WebGL.
          */
         Configuration& setFlags(Flags flags) {
@@ -368,14 +369,14 @@ class WindowlessEglApplication {
          * Unlike above, the context is not created and must be created later
          * with @ref createContext() or @ref tryCreateContext().
          */
-        explicit WindowlessEglApplication(const Arguments& arguments, NoCreateT);
+        explicit WindowlessEglApplication(const Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief WindowlessEglApplication(const Arguments&, NoCreateT)
-         * @deprecated Use @ref WindowlessEglApplication(const Arguments&, NoCreateT) instead.
+         * @brief @copybrief WindowlessEglApplication(const Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref WindowlessEglApplication(const Arguments&, GL::NoCreateT) instead.
          */
-        CORRADE_DEPRECATED("use WindowlessEglApplication(const Arguments&, NoCreateT) instead") explicit WindowlessEglApplication(const Arguments& arguments, std::nullptr_t): WindowlessEglApplication{arguments, NoCreate} {}
+        CORRADE_DEPRECATED("use WindowlessEglApplication(const Arguments&, GL::NoCreateT) instead") explicit WindowlessEglApplication(const Arguments& arguments, std::nullptr_t): WindowlessEglApplication{arguments, GL::NoCreate} {}
         #endif
 
         /** @brief Copying is not allowed */
@@ -431,7 +432,7 @@ class WindowlessEglApplication {
 
     private:
         WindowlessEglContext _glContext;
-        std::unique_ptr<Platform::Context> _context;
+        std::unique_ptr<Platform::GLContext> _context;
 };
 
 /** @hideinitializer

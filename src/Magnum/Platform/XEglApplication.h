@@ -100,15 +100,15 @@ class XEglApplication: public AbstractXApplication {
          */
         explicit XEglApplication(const Arguments& arguments, const Configuration& configuration = Configuration());
 
-        /** @copydoc Sdl2Application::Sdl2Application(const Arguments&, NoCreateT) */
-        explicit XEglApplication(const Arguments& arguments, NoCreateT);
+        /** @copydoc Sdl2Application::Sdl2Application(const Arguments&, GL::NoCreateT) */
+        explicit XEglApplication(const Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief XEglApplication(const Arguments&, NoCreateT)
-         * @deprecated Use @ref XEglApplication(const Arguments&, NoCreateT) instead.
+         * @brief @copybrief XEglApplication(const Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref XEglApplication(const Arguments&, GL::NoCreateT) instead.
          */
-        CORRADE_DEPRECATED("use XEglApplication(const Arguments&, NoCreateT) instead") explicit XEglApplication(const Arguments& arguments, std::nullptr_t): XEglApplication{arguments, NoCreate} {}
+        CORRADE_DEPRECATED("use XEglApplication(const Arguments&, GL::NoCreateT) instead") explicit XEglApplication(const Arguments& arguments, std::nullptr_t): XEglApplication{arguments, GL::NoCreate} {}
         #endif
 
     protected:

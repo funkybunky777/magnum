@@ -32,7 +32,12 @@
 #include <memory>
 #include <Corrade/Containers/EnumSet.h>
 
-#include "Magnum/OpenGL.h"
+/* Include our GL headers first to avoid conflicts */
+#include "Magnum/Magnum.h"
+#include "Magnum/GL/OpenGL.h"
+#include "Magnum/GL/Tags.h"
+#include "Magnum/Platform/Platform.h"
+
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -42,9 +47,6 @@
 #undef None
 #undef Status
 
-#include "Magnum/Magnum.h"
-#include "Magnum/Tags.h"
-#include "Magnum/Platform/Platform.h"
 
 namespace Magnum { namespace Platform {
 
@@ -68,7 +70,7 @@ class WindowlessGlxContext {
          * @brief Constructor
          * @param configuration Context configuration
          * @param context       Optional Magnum context instance constructed
-         *      using @ref NoCreate to manage driver workarounds
+         *      using @ref GL::NoCreate to manage driver workarounds
          *
          * On desktop GL, if version is not specified in @p configuration, the
          * application first tries to create core context (OpenGL 3.1+) and if
@@ -80,18 +82,19 @@ class WindowlessGlxContext {
          * compatibility OpenGL 2.1 context is created instead to make the
          * driver use the latest available version.
          *
-         * Once the context is created, make it current using @ref makeCurrent()
-         * and create @ref Platform::Context instance to be able to use Magnum.
+         * Once the context is created, make it current using
+         * @ref makeCurrent() and create @ref Platform::GLContext instance to
+         * be able to use Magnum.
          * @see @ref isCreated()
          */
-        explicit WindowlessGlxContext(const Configuration& configuration, Context* context = nullptr);
+        explicit WindowlessGlxContext(const Configuration& configuration, GLContext* context = nullptr);
 
         /**
-         * @brief Construct without creating the context
+         * @brief Construct without creating an OpenGL context
          *
          * Move a instance with created context over to make it usable.
          */
-        explicit WindowlessGlxContext(NoCreateT) {}
+        explicit WindowlessGlxContext(GL::NoCreateT) {}
 
         /** @brief Copying is not allowed */
         WindowlessGlxContext(const WindowlessGlxContext&) = delete;
@@ -168,7 +171,7 @@ class WindowlessGlxContext::Configuration {
          * @brief Set context flags
          * @return Reference to self (for method chaining)
          *
-         * Default is no flag. See also @ref Context::flags().
+         * Default is no flag. See also @ref GL::Context::flags().
          */
         Configuration& setFlags(Flags flags) {
             _flags = flags;
@@ -288,14 +291,14 @@ class WindowlessGlxApplication {
          * Unlike above, the context is not created and must be created later
          * with @ref createContext() or @ref tryCreateContext().
          */
-        explicit WindowlessGlxApplication(const Arguments& arguments, NoCreateT);
+        explicit WindowlessGlxApplication(const Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief WindowlessGlxApplication(const Arguments&, NoCreateT)
-         * @deprecated Use @ref WindowlessGlxApplication(const Arguments&, NoCreateT) instead.
+         * @brief @copybrief WindowlessGlxApplication(const Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref WindowlessGlxApplication(const Arguments&, GL::NoCreateT) instead.
          */
-        CORRADE_DEPRECATED("use WindowlessGlxApplication(const Arguments&, NoCreateT) instead") explicit WindowlessGlxApplication(const Arguments& arguments, std::nullptr_t): WindowlessGlxApplication{arguments, NoCreate} {}
+        CORRADE_DEPRECATED("use WindowlessGlxApplication(const Arguments&, GL::NoCreateT) instead") explicit WindowlessGlxApplication(const Arguments& arguments, std::nullptr_t): WindowlessGlxApplication{arguments, GL::NoCreate} {}
         #endif
 
         /** @brief Copying is not allowed */
@@ -351,7 +354,7 @@ class WindowlessGlxApplication {
 
     private:
         WindowlessGlxContext _glContext;
-        std::unique_ptr<Platform::Context> _context;
+        std::unique_ptr<Platform::GLContext> _context;
 };
 
 /** @hideinitializer

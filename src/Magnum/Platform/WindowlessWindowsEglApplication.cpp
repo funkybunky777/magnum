@@ -28,14 +28,14 @@
 #include <Corrade/Utility/Assert.h>
 #include <Corrade/Utility/Debug.h>
 
-#include "Magnum/Version.h"
+#include "Magnum/GL/Version.h"
 #include "Magnum/Platform/Context.h"
 
 #include "Implementation/Egl.h"
 
 namespace Magnum { namespace Platform {
 
-WindowlessWindowsEglContext::WindowlessWindowsEglContext(const Configuration& configuration, Context*) {
+WindowlessWindowsEglContext::WindowlessWindowsEglContext(const Configuration& configuration, GLContext*) {
     /* Register the window class (if not yet done) */
     WNDCLASSW wc;
     if(!GetClassInfoW(GetModuleHandleW(nullptr), L"Magnum Windowless Application", &wc)) {
@@ -169,11 +169,11 @@ bool WindowlessWindowsEglContext::makeCurrent() {
 WindowlessWindowsEglApplication::WindowlessWindowsEglApplication(const Arguments& arguments): WindowlessWindowsEglApplication{arguments, Configuration{}} {}
 #endif
 
-WindowlessWindowsEglApplication::WindowlessWindowsEglApplication(const Arguments& arguments, const Configuration& configuration): WindowlessWindowsEglApplication{arguments, NoCreate} {
+WindowlessWindowsEglApplication::WindowlessWindowsEglApplication(const Arguments& arguments, const Configuration& configuration): WindowlessWindowsEglApplication{arguments, GL::NoCreate} {
     createContext(configuration);
 }
 
-WindowlessWindowsEglApplication::WindowlessWindowsEglApplication(const Arguments& arguments, NoCreateT): _glContext{NoCreate}, _context{new Context{NoCreate, arguments.argc, arguments.argv}} {}
+WindowlessWindowsEglApplication::WindowlessWindowsEglApplication(const Arguments& arguments, GL::NoCreateT): _glContext{GL::NoCreate}, _context{new GLContext{GL::NoCreate, arguments.argc, arguments.argv}} {}
 
 void WindowlessWindowsEglApplication::createContext() { createContext({}); }
 

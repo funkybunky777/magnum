@@ -99,15 +99,15 @@ class GlxApplication: public AbstractXApplication {
          */
         explicit GlxApplication(const Arguments& arguments, const Configuration& configuration = Configuration());
 
-        /** @copydoc Sdl2Application::Sdl2Application(const Arguments&, NoCreateT) */
-        explicit GlxApplication(const Arguments& arguments, NoCreateT);
+        /** @copydoc Sdl2Application::Sdl2Application(const Arguments&, GL::NoCreateT) */
+        explicit GlxApplication(const Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief GlxApplication(const Arguments&, NoCreateT)
-         * @deprecated Use @ref GlxApplication(const Arguments&, NoCreateT) instead.
+         * @brief @copybrief GlxApplication(const Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref GlxApplication(const Arguments&, GL::NoCreateT) instead.
          */
-        CORRADE_DEPRECATED("use GlxApplication(const Arguments&, NoCreateT) instead") explicit GlxApplication(const Arguments& arguments, std::nullptr_t): GlxApplication{arguments, NoCreate} {}
+        CORRADE_DEPRECATED("use GlxApplication(const Arguments&, GL::NoCreateT) instead") explicit GlxApplication(const Arguments& arguments, std::nullptr_t): GlxApplication{arguments, GL::NoCreate} {}
         #endif
 
     protected:

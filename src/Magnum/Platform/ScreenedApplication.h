@@ -32,7 +32,7 @@
 #include <Corrade/Containers/LinkedList.h>
 
 #include "Magnum/Magnum.h"
-#include "Magnum/Tags.h"
+#include "Magnum/GL/Tags.h"
 #include "Magnum/Platform/Platform.h"
 
 namespace Magnum { namespace Platform {
@@ -118,14 +118,14 @@ template<class Application> class BasicScreenedApplication: public Application, 
          * with @ref Sdl2Application::createContext() "createContext()" or
          * @ref Sdl2Application::tryCreateContext() "tryCreateContext()".
          */
-        explicit BasicScreenedApplication(const typename Application::Arguments& arguments, NoCreateT);
+        explicit BasicScreenedApplication(const typename Application::Arguments& arguments, GL::NoCreateT);
 
         #ifdef MAGNUM_BUILD_DEPRECATED
         /**
-         * @brief @copybrief BasicScreenedApplication(const typename Application::Arguments&, NoCreateT)
-         * @deprecated Use @ref BasicScreenedApplication(const typename Application::Arguments&, NoCreateT) instead.
+         * @brief @copybrief BasicScreenedApplication(const typename Application::Arguments&, GL::NoCreateT)
+         * @deprecated Use @ref BasicScreenedApplication(const typename Application::Arguments&, GL::NoCreateT) instead.
          */
-        CORRADE_DEPRECATED("use BasicScreenedApplication(const Arguments&, NoCreateT) instead") explicit BasicScreenedApplication(const typename Application::Arguments& arguments, std::nullptr_t): BasicScreenedApplication{arguments, NoCreate} {}
+        CORRADE_DEPRECATED("use BasicScreenedApplication(const Arguments&, GL::NoCreateT) instead") explicit BasicScreenedApplication(const typename Application::Arguments& arguments, std::nullptr_t): BasicScreenedApplication{arguments, GL::NoCreate} {}
         #endif
 
         /**
