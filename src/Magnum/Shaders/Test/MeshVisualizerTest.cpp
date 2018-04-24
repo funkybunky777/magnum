@@ -41,7 +41,7 @@ MeshVisualizerTest::MeshVisualizerTest() {
 
 void MeshVisualizerTest::constructNoCreate() {
     {
-        Shaders::MeshVisualizer shader{NoCreate};
+        Shaders::MeshVisualizer shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 

@@ -41,7 +41,7 @@ PhongTest::PhongTest() {
 
 void PhongTest::constructNoCreate() {
     {
-        Shaders::Phong shader{NoCreate};
+        Shaders::Phong shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 

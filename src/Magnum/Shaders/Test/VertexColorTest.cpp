@@ -43,7 +43,7 @@ VertexColorTest::VertexColorTest() {
 
 void VertexColorTest::constructNoCreate2D() {
     {
-        Shaders::VertexColor2D shader{NoCreate};
+        Shaders::VertexColor2D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 
@@ -52,7 +52,7 @@ void VertexColorTest::constructNoCreate2D() {
 
 void VertexColorTest::constructNoCreate3D() {
     {
-        Shaders::VertexColor3D shader{NoCreate};
+        Shaders::VertexColor3D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 

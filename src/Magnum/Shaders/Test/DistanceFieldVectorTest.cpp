@@ -43,7 +43,7 @@ DistanceFieldVectorTest::DistanceFieldVectorTest() {
 
 void DistanceFieldVectorTest::constructNoCreate2D() {
     {
-        Shaders::DistanceFieldVector2D shader{NoCreate};
+        Shaders::DistanceFieldVector2D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 
@@ -52,7 +52,7 @@ void DistanceFieldVectorTest::constructNoCreate2D() {
 
 void DistanceFieldVectorTest::constructNoCreate3D() {
     {
-        Shaders::DistanceFieldVector3D shader{NoCreate};
+        Shaders::DistanceFieldVector3D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 

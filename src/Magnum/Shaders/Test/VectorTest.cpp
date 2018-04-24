@@ -43,7 +43,7 @@ VectorTest::VectorTest() {
 
 void VectorTest::constructNoCreate2D() {
     {
-        Shaders::Vector2D shader{NoCreate};
+        Shaders::Vector2D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 
@@ -52,7 +52,7 @@ void VectorTest::constructNoCreate2D() {
 
 void VectorTest::constructNoCreate3D() {
     {
-        Shaders::Vector3D shader{NoCreate};
+        Shaders::Vector3D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 

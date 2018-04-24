@@ -43,7 +43,7 @@ FlatTest::FlatTest() {
 
 void FlatTest::constructNoCreate2D() {
     {
-        Shaders::Flat2D shader{NoCreate};
+        Shaders::Flat2D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 
@@ -52,7 +52,7 @@ void FlatTest::constructNoCreate2D() {
 
 void FlatTest::constructNoCreate3D() {
     {
-        Shaders::Flat3D shader{NoCreate};
+        Shaders::Flat3D shader{GL::NoCreate};
         CORRADE_COMPARE(shader.id(), 0);
     }
 
