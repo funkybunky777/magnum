@@ -29,6 +29,9 @@
  * @brief Function @ref Magnum::MeshTools::fullScreenTriangle()
  */
 
+#include "Magnum/configure.h"
+
+#ifdef MAGNUM_TARGET_GL
 #include <memory>
 #include <utility>
 
@@ -88,6 +91,9 @@ std::pair<std::unique_ptr<GL::Buffer>, GL::Mesh> MAGNUM_MESHTOOLS_EXPORT fullScr
 This function implicitly uses current context version.
 */
 std::pair<std::unique_ptr<GL::Buffer>, GL::Mesh> MAGNUM_MESHTOOLS_EXPORT fullScreenTriangle();
+#else
+#error this header is available only in the OpenGL build
+#endif
 
 }}
 
